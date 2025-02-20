@@ -1,9 +1,11 @@
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
-import Box from "./Box";
-import { OrbitControls } from "@react-three/drei";
+// import Box from "./Box";
+import { Environment, OrbitControls } from "@react-three/drei";
 import { useControls } from "leva";
-import Circle from "./CircleWireframe";
+// import Circle from "./CircleWireframe";
+import Test from "./BoxWireframe2";
+import Animal2 from "./Animal2";
 
 function App() {
   const color = useControls({
@@ -21,7 +23,7 @@ function App() {
           fov: 75,
           near: 1,
           far: 100,
-          position: [3, 3, 0],
+          position: [15, 15, 0],
         }}
       >
         <color attach="background" args={[color.value]} />
@@ -31,10 +33,13 @@ function App() {
         <axesHelper args={[6]} />
         {/* 격자를 보여줌 */}
         <gridHelper args={[10, grid.segment]} />
+        {/* <Test /> */}
+        <Animal2 />
         {/* 박스 배치 */}
-        <Box />
+        {/* <Box /> */}
         {/* 원 배치 */}
-        <Circle />
+        {/* <Circle /> */}
+        {/* <Environment preset="sunset" /> */}
       </Canvas>
     </>
   );
