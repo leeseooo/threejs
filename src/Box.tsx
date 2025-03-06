@@ -49,7 +49,7 @@ export default function Box() {
   return (
     <>
       {/* 방향광 추가 */}
-      <directionalLight ref={lightRef} position={[5, 5, 5]} intensity={1} />
+      {/* <directionalLight ref={lightRef} position={[5, 5, 5]} intensity={1} /> */}
 
       {/* 박스 객체 */}
       <mesh

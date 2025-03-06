@@ -19,7 +19,6 @@ export default function WaterDroplet() {
   return (
     <>
       <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 5, 5]} intensity={1} />
 
       {/* 물방울 */}
       <mesh ref={dropletRef} position={[3, 3, 3]}>

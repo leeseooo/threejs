@@ -54,7 +54,9 @@ export default function Box() {
   return (
     <>
       {/* 방향광 추가 */}
-      <directionalLight ref={lightRef} position={[5, 5, 5]} intensity={1} />
+      {/* <directionalLight ref={lightRef} position={[5, 5, 5]} intensity={1} /> */}
+      <ambientLight color="blue" intensity={3} />
+      {/* <hemisphereLight args={[blue, yellow]} /> */}
       <WaterDroplet />
       {/* <fog attach="fog" args={["red", 3, 10]} /> */}
       {/* 박스 객체 */}
