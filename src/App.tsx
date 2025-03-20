@@ -11,6 +11,7 @@ import Box from "./BoxWireframe2";
 import Ground from "./Ground";
 import Scene from "./SpotLight";
 import Raycaster from "./Raycaster";
+import PaperScene from "./letter";
 
 function App() {
   const color = useControls({
@@ -23,7 +24,9 @@ function App() {
 
   return (
     <>
-      <Raycaster />
+      {/* <Raycaster />
+       */}
+      <PaperScene />
     </>
   );
 }
