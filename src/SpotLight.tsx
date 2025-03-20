@@ -67,7 +67,7 @@ const Scene = () => {
   const thirdPlaceRef = useRef<THREE.Mesh>(null);
 
   const { nodes } = useGLTF("asset/spoon_b.glb"); // 업로드한 GLB 파일 경로 지정
-  const geometry = nodes.geometry_0;
+  const geometry = nodes.geometry_0 as unknown as THREE.BufferGeometry;
   console.log(nodes);
 
   return (
@@ -87,8 +87,8 @@ const Scene = () => {
       <mesh
         castShadow
         receiveShadow
-        geometry={geometry.geometry}
-        material={geometry.material}
+        geometry={geometry}
+        material={new THREE.MeshStandardMaterial({ color: "white" })}
         name={"geometry_0"}
         dispose={null}
         position={[0, 1.5, 0]}
@@ -96,14 +96,14 @@ const Scene = () => {
       <mesh
         castShadow
         receiveShadow
-        geometry={geometry.geometry}
-        material={geometry.material}
+        geometry={geometry}
+        material={new THREE.MeshStandardMaterial({ color: "white" })}
         name={"geometry_0"}
         dispose={null}
         position={[-2, 0.96, 0]}
       ></mesh>
 
-      <mesh
+      {/* <mesh
         castShadow
         receiveShadow
         geometry={geometry.geometry}
@@ -111,7 +111,7 @@ const Scene = () => {
         name={"geometry_0"}
         dispose={null}
         position={[2, 0.75, 0]}
-      ></mesh>
+      ></mesh> */}
 
       <OrbitControls />
     </Canvas>
