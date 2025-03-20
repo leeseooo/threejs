@@ -1,11 +1,17 @@
 import * as THREE from "three";
-import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
+import {
+  Canvas,
+  useFrame,
+  useLoader,
+  useThree,
+  type ThreeEvent,
+} from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { useRef, useState } from "react";
 
 // 🎯 1. 원형 다트보드 과녁 (이미지+마스크 적용)
 function Target({ onHover }: { onHover: (hovering: boolean) => void }) {
-  const texture = useLoader(THREE.TextureLoader, "../public/asset/과녁.png"); // 과녁 이미지
+  const texture = useLoader(THREE.TextureLoader, "/asset/과녁.png"); // 과녁 이미지
   return (
     <mesh
       name="target"
@@ -121,7 +127,7 @@ function Crosshair3D() {
 }
 
 // 🔫 5. 씬(Scene) 컴포넌트
-function Scene({ setScore }: { setScore: (score: number) => void }) {
+function Scene() {
   const { camera, scene } = useThree();
   const [flyingArrows, setFlyingArrows] = useState<
     { start: THREE.Vector3; target: THREE.Vector3 }[]
@@ -129,9 +135,9 @@ function Scene({ setScore }: { setScore: (score: number) => void }) {
   const [stuckArrows, setStuckArrows] = useState<
     { position: THREE.Vector3; rotation: THREE.Quaternion }[]
   >([]);
-  const [hovering, setHovering] = useState(false);
+  const [, setHovering] = useState(false);
 
-  const handleShoot = (e: any) => {
+  const handleShoot = (e: ThreeEvent<MouseEvent>) => {
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2(
       (e.clientX / window.innerWidth) * 2 - 1,
@@ -196,7 +202,7 @@ function Scene({ setScore }: { setScore: (score: number) => void }) {
 
 // 🎮 6. 전체 앱
 export default function App() {
-  const [score, setScore] = useState(0);
+  const [score] = useState(0);
 
   return (
     <>
@@ -207,8 +213,8 @@ export default function App() {
         {/* x, y, z축을 보여줌 */}
         <axesHelper args={[6]} />
         {/* 격자를 보여줌 */}
-        <gridHelper />
-        <Scene setScore={setScore} />
+        <gridHelper args={[10, 10]} />
+        <Scene />
       </Canvas>
     </>
   );

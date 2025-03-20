@@ -1,6 +1,6 @@
-import { Environment, OrbitControls } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { Suspense, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 
 export default function WaterDroplet() {
