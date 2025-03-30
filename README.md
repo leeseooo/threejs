@@ -1,27 +1,31 @@
-# React + TypeScript + Vite
+# 💌 메꾸(Merit Money 꾸미기) (Beta)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+메릿머니에 자유롭게 스티커를 붙일 수 있는 베타 버전의 인터랙티브 Three.js 웹앱 입니다. <br/>
+현재 간단한 데모 수준이며 계속해서 기능 추가 예정입니다.
 
-Currently, two official plugins are available:
+## ✨ 현재 구현된 기능
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ✅ Three.js를 이용한 메릿머니 3D 모델 렌더링
+- ✅ 클릭한 위치에 자유롭게 스티커 부착 가능
+- ✅ leva를 통한 스티커 크기 조정 가능
 
-## Expanding the ESLint configuration
+## 🛠 기술 스택
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+| 기술                 | 설명                               |
+|----------------------|------------------------------------|
+| ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB) | 인터랙티브 UI 컴포넌트 구축 |
+| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) | 코드 안정성과 타입 안정성 제공 |
+| ![Three.js](https://img.shields.io/badge/Three.js-000000?style=flat-square&logo=three.js&logoColor=white) | 3D 모델 렌더링 및 인터랙션 |
+| ![@react-three/fiber](https://img.shields.io/badge/react--three/fiber-FFDD00?style=flat-square&logo=react&logoColor=black) | React 환경에서 Three.js 사용 |
+| ![@react-three/drei](https://img.shields.io/badge/react--three/drei-0EA5E9?style=flat-square&logo=react&logoColor=white) | Three.js의 유용한 helper 및 컴포넌트 |
+| ![leva](https://img.shields.io/badge/Leva-ff007f?style=flat-square) | 실시간 인터랙티브 컨트롤 패널 |
 
-- Configure the top-level `parserOptions` property like this:
+## 🚀 프로젝트 실행 방법
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```bash
+# 의존성 설치
+npm install
+
+# 개발 서버 시작
+npm run dev
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
