@@ -1,7 +1,7 @@
 import { useControls } from 'leva';
 import { useThree, type ThreeEvent } from '@react-three/fiber';
 import { OrbitControls, Text3D, Html, Float, Image } from '@react-three/drei';
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useState } from 'react';
 import * as THREE from 'three';
 import React from 'react';
 import { MeritMoney } from './MeritMoney';
@@ -52,7 +52,6 @@ const PaperScene = React.forwardRef<THREE.Group, PaperSceneProps>(
     ref
   ) => {
     const { camera, scene, gl } = useThree();
-
     const { stickerScale } = useControls({
       stickerScale: {
         value: 0.3,
@@ -63,15 +62,27 @@ const PaperScene = React.forwardRef<THREE.Group, PaperSceneProps>(
       },
     });
 
+    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const isStickerDeletingRef = useRef(false);
+
+    // 클릭하면 해당 인덱스를 삭제
+    const removeHoveredSticker = (e: ThreeEvent<MouseEvent>, index: number) => {
+      e.stopPropagation();
+      isStickerDeletingRef.current = true;
+      setStickerList((prev) => prev.filter((_, i) => i !== index));
+      setTimeout(() => (isStickerDeletingRef.current = false), 50);
+    };
+
     const raycaster = new THREE.Raycaster();
     const pointer = new THREE.Vector2();
     const paperRef = useRef<THREE.Group>(null);
 
     // 📌 3D 텍스트 및 스티커 추가 로직
     const handlePointerDown = (event: ThreeEvent<PointerEvent>) => {
-      event.stopPropagation();
-
+      if (isStickerDeletingRef.current) return;
       if (!selectedText) return;
+
+      event.stopPropagation();
 
       pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
       pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -136,13 +147,23 @@ const PaperScene = React.forwardRef<THREE.Group, PaperSceneProps>(
           </Text3D>
         ))}
 
-        {stickerList.map(({ sticker, point }) => (
+        {stickerList.map(({ sticker, point }, index) => (
           <Image
             url={sticker}
             position={[point.x, point.y, point.z + 0.01]} // z-fighting 방지
             transparent
             scale={stickerScale}
             toneMapped={false}
+            onPointerDown={(e) => removeHoveredSticker(e, index)}
+            onPointerOver={(e) => {
+              e.stopPropagation();
+              setHoveredIndex(index);
+            }}
+            onPointerOut={(e) => {
+              e.stopPropagation();
+              setHoveredIndex(null);
+            }}
+            color={hoveredIndex === index ? '#ff8888' : 'white'}
           />
         ))}
 
